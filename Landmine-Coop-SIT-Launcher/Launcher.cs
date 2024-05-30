@@ -13,9 +13,12 @@ namespace Landmine_Coop_SIT_Launcher
             }
             
             var installPath = HelperUtils.GetInstallPath();
-            ValidateAndUpdate();
-            ManageConfig(installPath);
-            ManagePlugins(installPath);
+            if(ValidateAndUpdate())
+            {
+                ManageConfig(installPath);
+                ManagePlugins(installPath);
+            }
+            
             Process.Start(Path.Combine(HelperUtils.BaseDirectoryPath, "SIT.Manager.exe"));
         }
         
@@ -35,7 +38,7 @@ namespace Landmine_Coop_SIT_Launcher
             HelperUtils.CopyFilesRecursively(HelperUtils.CustomModsPath, Path.Combine(installPath, "BepInEx" , "plugins"));
         }
         
-        private static void ValidateAndUpdate()
+        private static bool ValidateAndUpdate()
         {
             var googleDownloader = new GoogleDownloader();
             
@@ -47,7 +50,10 @@ namespace Landmine_Coop_SIT_Launcher
                 Directory.CreateDirectory(HelperUtils.CoopModsPath);
                 googleDownloader.GetGoogleFolderFolder(HelperUtils.FolderId, HelperUtils.CoopModsPath);
                 Task.WaitAll(googleDownloader.Downloads.ToArray());
+                return true;
             }
+            
+            return false;
         }
     }
 }

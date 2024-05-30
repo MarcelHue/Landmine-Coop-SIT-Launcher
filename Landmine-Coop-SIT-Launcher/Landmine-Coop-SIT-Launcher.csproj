@@ -9,6 +9,8 @@
         <PackageId>Landmine-Coop-SIT-Launcher By HaloBoy</PackageId>
         <Authors>HaloBoy</Authors>
         <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>Landmine_Coop_SIT_Launcher.snk</AssemblyOriginatorKeyFile>
+        <PublicSign>true</PublicSign>
     </PropertyGroup>
 
     <ItemGroup>
